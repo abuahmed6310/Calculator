@@ -1,0 +1,142 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: lightblue;
+}
+
+.container-parent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	
+}
+
+.calculator{
+    max-width: 300px;
+    width: 100%;
+    margin: 3rem auto;
+}
+
+.screen{
+    padding: .650rem .400rem;
+    background-color: white;
+    margin-bottom: .110rem;
+}
+
+.calculator-display{
+  
+  text-align: right;
+}
+.calculator-display output {
+	display: block;
+	border: none;
+	outline: none;
+	background: transparent;
+	width: 100%;
+}
+output#user-input {
+    margin-bottom: .750rem;
+	font-size: 1.025rem;
+	font-weight: 200;
+	text-align: right;
+	color: #60A07F;
+}
+output#result {
+	font-size: 1.625rem;
+	font-weight: 400;
+	text-align: right;
+	color: black;
+}
+
+.button-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
+    grid-gap: .065rem;
+    padding: 0rem;
+}
+
+.btn{
+    font-size: 1.325rem;
+    padding: 1.33rem 0;
+    font-weight: 300;
+    border: 0px solid transparent;
+    outline: none;
+    text-decoration: none;
+    color: rgb(15, 1, 1);
+    background-color: white;
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+.btn:hover{
+    background: #bdbdbd;
+	color: #212121;
+	transform: translateY(-0.2rem);
+}
+.btn:active{
+    background: lightcoral;
+	color: #000;
+	transform: translateY(0rem);
+}
+
+.gray-backg{
+    font-size: 1.325rem;
+    padding: 1.33rem 0;
+    font-weight: 50;
+    border: 0px solid transparent;
+    outline: none;
+    text-decoration: none;
+    color: darkslategray;
+   background-color: lightgoldenrodyellow;
+   cursor: pointer;
+    transition: all .15s ease-in-out;
+}
+.gray-backg:hover{
+    background: darkkhaki;
+	color: #212121;
+	transform: translateY(-0.2rem);
+}
+.gray-backg:active{
+    background: lightcoral;
+	color: #000;
+	transform: translateY(0rem);
+}
+
+.span-3{
+    grid-column-start: auto;
+    grid-column-end: span 3;
+}
+
+footer{
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    justify-self: end;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: space-around;
+    justify-content: space-around;
+    color: darkslategray;
+    background-color: lightgoldenrodyellow;;
+    font-size: .9rem;
+    line-height: 20px;
+    font-weight: 700;
+	text-align: center;
+	text-shadow: -1px 1.5px 0px rgba(0,0,0,0.3);
+}
+
+.description{
+    margin-right: 2rem;
+}
+
+a{
+    color: darkslategray;
+}

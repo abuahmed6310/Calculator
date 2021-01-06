@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculator</title>
+	<link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+
+<body>
+    <div class="container-parent">
+
+        <div class="calculator">
+            <div class="screen">
+                <div class="calculator-display">
+                    <output class="user-input" type="text" id="user-input">0</output>	
+                    <output class="result" type="text" id="result">&nbsp;</output>	
+                </div>
+            </div>
+
+            <div class="button-grid">
+                <div class="span-3 gray-backg" data-type="reset" id="allclear">CLEAR</div>
+                <div class="gray-backg" data-type="backspace" id="clear">&#8676</div>
+                <div class="btn" data-type="number" id="digit-7" value="7">7</div>
+                <div class="btn" data-type="number" id="digit-8" value="8">8</div>
+                <div class="btn" data-type="number" id="digit-9" value="7">9</div>
+                <div class="gray-backg" data-type="operator" id="divide" value="/">&#247</div>
+                <div class="btn" data-type="number" id="digit-4" value="4">4</div>
+                <div class="btn" data-type="number" id="digit-5" value="5">5</div>
+                <div class="btn" data-type="number" id="digit-6" value="6">6</div>
+                <div class="gray-backg" data-type="operator" id="multiply" value="x">&#215</div>
+                <div class="btn" data-type="number" id="digit-1" value="1">1</div>
+                <div class="btn" data-type="number" id="digit-2" value="2">2</div>
+                <div class="btn" data-type="number" id="digit-3" value="3">3</div>
+                <div class="gray-backg" data-type="operator" id="minus" value="-">&#45</div>
+                <div class="btn" data-type="decimal" id="decimal" value=".">.</div>
+                <div class="btn" data-type="number" id="digit-0" value="0">0</div>
+                <div class="btn" data-type="equal" id="equals" value="=">&#61</div>
+                <div class="gray-backg" data-type="operator" id="plus" value="+">&#43</div>
+            </div>
+        </div>
+
+        <footer>
+            <p class="description">JavaScript Web Dev 101 &nbsp;&nbsp;
+                <a href="https://www.theodinproject.com/courses/web-development-101/lessons/calculator">
+                    The Odin Project</a></p>
+            <p>Aziz B. Mohammed &copy; 2021</p>
+        </footer>
+    </div>
+
+   <script src="./script.js"></script>
+</body>
+
+</html>
