@@ -1,27 +1,52 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-body{
-    padding: 0;
-    margin: 0;
+:root{
+
+    /*      Theme colors        */
+    --text-gray: #3f4954;
+    --text-light : #686666da;
+    --bg-color: #0f0f0f;
+    --white: #ffffff;
+    --midnight: #104f55;
+
+    /* gradient color   */
+    --sky: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+html, body{
+    margin: 0%;
     font-family: 'Roboto', sans-serif;
     background-color: lightblue;
 }
 
+
+
+/* ---------------- Global Classes ---------------*/
+
+a{
+    color: darkslategray;
+}
+.span-3{
+    grid-column-start: auto;
+    grid-column-end: span 3;
+}
+/* ------x------- Global Classes -------x-------*/
+
+
+
 .container-parent {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	text-align: center;
-	
+    height: 90vh;
+    text-align: center;
+	padding: 0;
 }
 
 .calculator{
+    width: 80%;
     max-width: 300px;
-    width: 100%;
-    margin: 3rem auto;
+    margin: auto;
+    margin-top: 5rem;
 }
 
 .screen{
@@ -64,79 +89,115 @@ output#result {
 }
 
 .btn{
+
     font-size: 1.325rem;
-    padding: 1.33rem 0;
+    padding: 1.33rem 0rem;
     font-weight: 300;
     border: 0px solid transparent;
     outline: none;
     text-decoration: none;
-    color: rgb(15, 1, 1);
-    background-color: white;
     cursor: pointer;
     transition: all .15s ease-in-out;
 }
-.btn:hover{
+
+.btn-white{
+    color: rgb(15, 1, 1);
+    background-color: var(--white);
+}
+.btn-white:hover{
     background: #bdbdbd;
 	color: #212121;
 	transform: translateY(-0.2rem);
 }
-.btn:active{
+.btn-white:active{
     background: lightcoral;
 	color: #000;
 	transform: translateY(0rem);
 }
 
-.gray-backg{
-    font-size: 1.325rem;
-    padding: 1.33rem 0;
-    font-weight: 50;
-    border: 0px solid transparent;
-    outline: none;
-    text-decoration: none;
+.gray-btn{
     color: darkslategray;
    background-color: lightgoldenrodyellow;
-   cursor: pointer;
-    transition: all .15s ease-in-out;
 }
-.gray-backg:hover{
+.gray-btn:hover{
     background: darkkhaki;
 	color: #212121;
 	transform: translateY(-0.2rem);
 }
-.gray-backg:active{
+.gray-btn:active{
     background: lightcoral;
 	color: #000;
 	transform: translateY(0rem);
 }
 
-.span-3{
-    grid-column-start: auto;
-    grid-column-end: span 3;
+.footer{
+    width: 100%;
+    height: 70px;
+    background-color: lightgoldenrodyellow;
 }
 
-footer{
-    width: 100%;
-    height: 50px;
-    margin: 0;
-    justify-self: end;
-    padding-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: space-around;
-    justify-content: space-around;
+.footer-con{
+    height: 100%;
+    padding: 0rem .9rem;
     color: darkslategray;
-    background-color: lightgoldenrodyellow;;
     font-size: .9rem;
-    line-height: 20px;
     font-weight: 700;
-	text-align: center;
-	text-shadow: -1px 1.5px 0px rgba(0,0,0,0.3);
 }
 
 .description{
-    margin-right: 2rem;
+   font-style: normal;
+}
+.copyright{
+    color: #000;
+    font-style: oblique;
+    text-shadow: -1px 1.5px 0px rgba(0,0,0,0.45);
+}
+.code{
+  font-style: italic;
 }
 
-a{
-    color: darkslategray;
-}
+
+
+@media only screen and (max-width: 520px){
+    .calculator{
+        width: 200px;
+    }
+
+    .btn{
+        font-size: 1.025rem;
+        padding: .93rem 0;
+        font-weight: 180;
+    }
+
+    output#user-input {
+        margin-bottom: .450rem;
+        font-size: .725rem;
+        font-weight: 200;
+    }
+    output#result {
+        font-size: 1.225rem;
+        font-weight: 400;
+    }
+    .footer{
+        height: 120px;
+        margin-top: 7rem;
+        align-content: center;
+        padding: 1rem 0;
+    }
+    
+    
+    }
+
+
+    @media only screen and (min-width: 520px){
+        
+        .footer-con{
+            margin: 0;
+            padding: 0;
+            margin-top: 5rem;
+            display: flex;
+            align-content: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+    }

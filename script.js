@@ -1,12 +1,12 @@
 
-const userInput = document.querySelector('#user-input');
-const displayResult = document.querySelector('#result');
+const inputDisplayer = document.querySelector('#user-input');
+const resultDisplayer = document.querySelector('#result');
 const allKeys = document.querySelectorAll('[data-type]');
 
     let keys = '';
 	let keyValue = '';
-    let inputDisplay = '';
-    let resultDisplay = '';
+    let inputText = '';
+    let resultText = '';
     let types = '';
     let  value  = '';
 
@@ -26,104 +26,120 @@ allKeys.forEach(key => key.addEventListener('click', whenClicked));
 function whenClicked(event) {
     let key = event.target;
 	keyValue = key.textContent;
-    inputDisplay = userInput.textContent;
-    resultDisplay = displayResult.textContent;
+    inputText = inputDisplayer.textContent;
+    resultText = resultDisplayer.textContent;
     const { type } = key.dataset;
     types =  type ;
     value  = key.id;
     
-    
-    if(type === 'number'&& checkForDecimal.length <= 16) {
-        
+
+    switch (type) {
+
+        case 'number':
+            if (checkForDecimal.length > 16) break;
             if(!isEqualsPressed) {
-               userInput.textContent = (inputDisplay !== '0')? 
-                  inputDisplay + keyValue : keyValue;
-               displayResult.textContent = 
-                  (inputDisplay !== '0' && previousKey.type !== 'operator')? 
-                  resultDisplay + keyValue : keyValue;
-            }else{
-                userInput.textContent = keyValue;
-                displayResult.textContent = keyValue;
+                inputDisplayer.textContent = (inputText !== '0')? 
+                    inputText + keyValue : keyValue;
+                resultDisplayer.textContent = 
+                    (inputText !== '0' && previousKey.type !== 'operator')? 
+                    resultText + keyValue : keyValue;
+            }else if(isEqualsPressed) {
+                inputDisplayer.textContent = keyValue;
+                resultDisplayer.textContent = keyValue;
             }
+
             checkForDecimal = checkForDecimal + keyValue;
-            isEqualsPressed = false;
+            isEqualsPressed = false;  
+            break;
 
-    }else if (types === 'operator' && previousKey.type !== 'operator') {
-        if (!isEqualsPressed) {
-            if (isNaN(inputDisplay)) {
-                data.second = resultDisplay;
-                data.result = operate(data.first, data.operator, data.second);
-                userInput.textContent = data.result + ' ' + keyValue + ' '; 
-                data.first = data.result;
-            }else{
-                userInput.textContent = inputDisplay + ' ' + keyValue + ' ';
-                data.first = inputDisplay;
+        case 'operator':
+            if (previousKey.type === 'operator') {
+                inputDisplayer.textContent =
+                inputText.substring(0, inputText.length - 2) + keyValue + ' ';
+                data.operator = value;
+                data.operatorsign = keyValue;
+                break;
             }
-            displayResult.innerHTML = '&nbsp;';
-            data.operator = value;
-            data.operatorsign = keyValue; 
-            checkForDecimal = '';  
-        }else{
-            if (resultDisplay === 'Undefined') return;
-            userInput.textContent = data.result + ' ' + keyValue + ' ';
-            displayResult.innerHTML = '&nbsp;';
-            data.first = data.result;
-            data.operator = value; 
-            data.operatorsign = keyValue;
-            checkForDecimal = ''; 
-            isEqualsPressed = false; 
-        }
-    
-    }else if (types === 'operator' && previousKey.type === 'operator') {
-        userInput.textContent =
-          inputDisplay.substring(0, inputDisplay.length - 2) + keyValue + ' ';
-        data.operator = value;
-        data.operatorsign = keyValue;
 
-    }else if (types === 'decimal' && !isEqualsPressed && 
-       !checkForDecimal.includes('.')) {
-            userInput.textContent = (previousKey.type === 'operator')? 
-               inputDisplay + '0' + keyValue :  inputDisplay + keyValue;
-            displayResult.textContent = (checkForDecimal === '')?
-               '0' + keyValue : resultDisplay + keyValue ;
-			checkForDecimal = checkForDecimal + keyValue; 
-        
-    }else if(types === 'backspace' && inputDisplay !== '0' && !isEqualsPressed){
-        if (previousKey.type === 'operator') return;
-        userInput.textContent = (inputDisplay.length > 1)? 
-            inputDisplay.substring(0, inputDisplay.length - 1) : '0';
-        (resultDisplay.length > 1)? displayResult.textContent = 
-             resultDisplay.substring(0, resultDisplay.length - 1) 
-             : displayResult.innerHTML = '&nbsp;';
-        checkForDecimal = checkForDecimal.substring(0,checkForDecimal.length-1);
-        
-	} else if(type === 'reset'){
-			inputDisplay = '0';
-			userInput.textContent = inputDisplay;
-			displayResult.innerHTML = '&nbsp;';
+            if (!isEqualsPressed && isNaN(inputText) ) {
+                data.second = resultText;
+                data.result = operate(data.first, data.operator, data.second);
+                inputDisplayer.textContent = data.result + ' ' + keyValue + ' '; 
+                data.first = data.result;
+            }else if (!isEqualsPressed && !isNaN(inputText) ) {
+                inputDisplayer.textContent = inputText + ' ' + keyValue + ' ';
+                data.first = inputText;
+            }
+
+            if (!isEqualsPressed ) {
+                resultDisplayer.innerHTML = '&nbsp;';
+                data.operator = value;
+                data.operatorsign = keyValue; 
+                checkForDecimal = '';  
+            }else{
+                if (resultText === 'Undefined') return;
+                inputDisplayer.textContent = data.result + ' ' + keyValue + ' ';
+                resultDisplayer.innerHTML = '&nbsp;';
+                data.first = data.result;
+                data.operator = value; 
+                data.operatorsign = keyValue;
+                checkForDecimal = ''; 
+                isEqualsPressed = false; 
+            }
+            break;
+
+        case 'decimal':
+            if (checkForDecimal.includes('.') || isEqualsPressed) break;
+            inputDisplayer.textContent = (previousKey.type === 'operator')?
+               inputText + '0' + keyValue : inputText + keyValue;
+            resultDisplayer.textContent = (checkForDecimal === '')?
+               '0' + keyValue : resultText + keyValue ;
+            checkForDecimal = checkForDecimal + keyValue; 
+            break;
+
+        case 'backspace':
+            if (previousKey.type === 'operator') break;
+            if (inputText !== '0' && !isEqualsPressed) {
+                inputDisplayer.textContent = (inputText.length > 1)? 
+                inputText.substring(0, inputText.length - 1) : '0';
+                (resultText.length > 1)? resultDisplayer.textContent = 
+                   resultText.substring(0, resultText.length - 1) 
+                   : resultDisplayer.innerHTML = '&nbsp;';
+            checkForDecimal = checkForDecimal.substring(0,checkForDecimal.length-1);
+            }
+            break;
+
+        case 'reset':
+            inputText = '0';
+			inputDisplayer.textContent = inputText;
+			resultDisplayer.innerHTML = '&nbsp;';
 			isEqualsPressed = false;
 			checkForDecimal = '';
-        
-    }else if (types === 'equal') {
-         
-         if (isEqualsPressed) {
-            userInput.textContent = data.result + ' ' + data.operatorsign
-               + ' ' + data.second;
-            data.result = operate(data.result, data.operator, data.second); 
-         }else {
-            if (previousKey.type === 'operator' || !isNaN(inputDisplay)) return;
-            data.second = resultDisplay;
-           data.result = operate(data.first, data.operator, data.second);
-           isEqualsPressed = true;
-       }
-       
-       data.result = setupresult(data.result);
-       displayResult.textContent = data.result; 
-       
-    }
+            break;
+
+        case 'equal':
+            if (!isEqualsPressed && (previousKey.type === 'operator' || 
+                 !isNaN(inputText))) break;
+            if (isEqualsPressed) {
+                inputDisplayer.textContent = data.result + ' ' + data.operatorsign
+                    + ' ' + data.second + ' ' + '=';
+                data.result = operate(data.result, data.operator, data.second); 
+            }else {
+                data.second = resultText;
+                data.result = operate(data.first, data.operator, data.second);
+                inputDisplayer.textContent = inputText + ' ' + '='; 
+                isEqualsPressed = true;
+            }
+            data.result = setupresult(data.result);
+            resultDisplayer.textContent = data.result;
+            break;
+
+        default:
+            break;
+    } // end of switch.
 
     previousKey.type = types;
-}
+}// end of when clicked.
 
 
 function operate(firstNumber, operator, secondNumber)  {
@@ -141,8 +157,9 @@ function operate(firstNumber, operator, secondNumber)  {
     else if (operator === 'multiply' || operator === 'x')
        return multiply(firstNumber, secondNumber);
     else return divide(firstNumber, secondNumber);
-     //(operator === 'divide' || operator === '/') 
-}
+     
+}// end of operate.
+
 
 function add(firstNumber, secondNumber) {
     return firstNumber + secondNumber;   
@@ -175,7 +192,7 @@ function setupresult(result) {
     return result; 
   } 
   
-}
+}// end of setupresult.
 
 
 // Event Listener for keyboard button press
